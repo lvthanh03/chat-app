@@ -4,18 +4,17 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Chat app</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto+Mono">
+  <title>Message someone Anonymously</title>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/3.1.1/socket.io.js"
     integrity="sha512-oFOCo2/3DtjrJG4N27BjSLQWoiBv171sK6a+JiWjp/7agxC2nCUP358AqzxkBUb5jX8g6CYLPdSKQTbC0weCwA=="
     crossorigin="anonymous"></script>
 
-  <!-- Script to emit/receive events from socket.io server -->
   <script defer src="chat.js"></script>
 
-  <!-- Stylesheet -->
   <style>
     body {
-      font-family: Arial, Helvetica, sans-serif;
+      font-family: Roboto Mono;
       box-sizing: border-box;
     }
 
@@ -24,13 +23,13 @@
       margin: 0 auto;
     }
 
-    #chatContainer {
-      height: 75vh;
-      border: 1px solid #e095fd;
+    #chat_Container {
+      height: 85vh;
+      border: 1px solid #ccffcc;
       border-radius: 10px;
       margin: 1rem 1rem;
       padding: 0.5rem;
-      overflow: scroll;
+      overflow-x: hidden;
     }
 
     #messageForm {
@@ -44,22 +43,26 @@
       padding: 0.5rem;
       margin: 0 0.5rem;
       width: 70%;
-      border: 1px solid #c2c2c2;
+      border: 1px round #ffffff;
       border-radius: 2px;
     }
 
     .input:active,
     .input:focus {
-      border-color: #9de3ff;
+      border-color: #000;
     }
 
     .btn {
       padding: 0.5rem;
-      background-color: #5fcefa;
-      border: 1px solid #06b8ff;
+      background-color: #fff;
+      border: 1px solid #fff;
       border-radius: 5px;
-      color: #fff;
+      color: #000;
       font-weight: 600;
+    }
+
+    h1 {
+      color: white;
     }
 
     .center {
@@ -71,18 +74,17 @@
       border-color: #fa7962 !important;
     }
 
-    /* default message styling for server notifications */
     .message {
-      background-color: rgb(223, 174, 230);
+      background-color: #ccffcc;
       color: #333;
       font-size: 1.2rem;
       text-align: center;
       border-radius: 5px;
       padding: 0.5rem;
       margin-top: 1rem;
+      word-wrap: break-word;
     }
 
-    /* change colors and alignment for self and others messages */
     .self-message {
       background-color: #ccffcc;
       text-align: right;
@@ -95,18 +97,14 @@
   </style>
 </head>
 
-<body>
+<body style="background-color: black;">
   <div id="app">
-    <h1 class="center">Chat app</h1>
-
-    <!-- Chat messages will be appended inside this container -->
-    <div id="chatContainer"></div>
-
-    <!-- Form to enter and submit new chat messages -->
+    <h1 class="center" >Message Anyone.</h1>
+    <div id="chat_Container"></div>
     <div class="center">
       <form id="messageForm">
-        <input class="input center" type="text" id="messageInput" />
-        <button class="btn" type="submit" id="sendBtn">Send!</button>
+        <input class="input center" type="text" id="messageInput" autocomplete="false"/>
+        <button class="btn" type="submit" id="sendBtn">Send</button>
       </form>
     </div>
   </div>

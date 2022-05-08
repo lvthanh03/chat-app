@@ -5,7 +5,7 @@ const app = http.createServer(requestHandler)
 
 // handles all http requests to the server
 function requestHandler(request, response) {
-    console.log(`🖥 Received request for ${request.url}`)
+    console.log('Received request for ${request.url}')
     // append /client to serve pages from that folder
     var filePath = './client' + request.url
     if (filePath == './client/') {
@@ -63,13 +63,13 @@ io.attach(app, {
 })
 
 io.on('connection', (socket) => {
-    console.log('👾 New socket connected! >>', socket.id)
+    console.log('New socket connected! >>', socket.id)
 })
 
 var users = {}
 
 io.on('connection', (socket) => {
-    console.log('👾 New socket connected! >>', socket.id)
+    console.log('New socket connected! >>', socket.id)
 
     // handles new connection
     socket.on('new-connection', (data) => {
@@ -81,14 +81,14 @@ io.on('connection', (socket) => {
         // emit welcome message event
         socket.emit('welcome-message', {
             user: 'server',
-            message: `Welcome to this Socket.io chat ${data.username}. There are ${Object.keys(users).length
+            message: `Hello ${data.username}! Welcome to the chat. There are ${Object.keys(users).length
                 } users connected`,
         })
     })
 
     // handles message posted by client
     socket.on('new-message', (data) => {
-        console.log(`👾 new-message from ${data.user}`)
+        console.log(`new-message from ${data.user}`)
         // broadcast message to all sockets except the one that triggered the event
         socket.broadcast.emit('broadcast-message', {
             user: users[data.user],
