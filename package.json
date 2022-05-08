@@ -3,6 +3,6 @@
     "socket.io": "^4.5.0"
   },
   "scripts": {
-    "start": "cd server && node server.js"
+    "start": "node server.js"
   }
 }
