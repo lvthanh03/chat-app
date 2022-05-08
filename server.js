@@ -1,11 +1,7 @@
 var http = require('http')
 var fs = require('fs')
 var path = require('path')
-const APP_PORT = process.env.APP_PORT || 3000
 const app = http.createServer(requestHandler)
-
-app.listen(APP_PORT)
-console.log(`🖥 HTTP Server running at ${APP_PORT}`)
 
 // handles all http requests to the server
 function requestHandler(request, response) {
@@ -45,6 +41,9 @@ function requestHandler(request, response) {
         }
     })
 }
+
+app.listen(process.env.PORT || 5000)
+console.log(`🖥 HTTP Server running at ${process.env.PORT || 5000}`)
 
 // SOCKET.IO CHAT EVENT HANDLING
 const io = require('socket.io')(app, {
