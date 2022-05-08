@@ -11,10 +11,10 @@ console.log(`🖥 HTTP Server running at ${APP_PORT}`)
 function requestHandler(request, response) {
     console.log(`🖥 Received request for ${request.url}`)
     // append /client to serve pages from that folder
-    var filePath = './client' + request.url
-    if (filePath == './client/') {
+    var filePath = '../client' + request.url
+    if (filePath == '../client/') {
         // serve index page on request /
-        filePath = './client/index.html'
+        filePath = '../client/index.html'
     }
     var extname = String(path.extname(filePath)).toLowerCase()
     console.log(`🖥 Serving ${filePath}`)
