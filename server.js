@@ -3,13 +3,10 @@ var fs = require('fs')
 var path = require('path')
 const app = http.createServer(requestHandler)
 
-// handles all http requests to the server
 function requestHandler(request, response) {
     console.log('Received request for ${request.url}')
-    // append /client to serve pages from that folder
     var filePath = './client' + request.url
     if (filePath == './client/') {
-        // serve index page on request /
         filePath = './client/index.html'
     }
     var extname = String(path.extname(filePath)).toLowerCase()
@@ -45,14 +42,11 @@ function requestHandler(request, response) {
 app.listen(process.env.PORT || 5000)
 console.log(`🖥 HTTP Server running at ${process.env.PORT || 5000}`)
 
-// SOCKET.IO CHAT EVENT HANDLING
 const io = require('socket.io')(app, {
     path: '/socket.io',
 })
 
 io.attach(app, {
-    // includes local domain to avoid CORS error locally
-    // configure it accordingly for production
     cors: {
         origin: 'http://localhost',
         methods: ['GET', 'POST'],
@@ -62,36 +56,24 @@ io.attach(app, {
     allowEIO3: true,
 })
 
-io.on('connection', (socket) => {
-    console.log('New socket connected! >>', socket.id)
-})
-
-var users = {}
+var user_list = {}
 
 io.on('connection', (socket) => {
-    console.log('New socket connected! >>', socket.id)
+    console.log(socket.id)
 
-    // handles new connection
     socket.on('new-connection', (data) => {
-        // captures event when new clients join
-        console.log(`new-connection event received`, data)
-        // adds user to list
-        users[socket.id] = data.username
-        console.log('users :>> ', users)
-        // emit welcome message event
+        console.log(data)
+        user_list[socket.id] = data.username
         socket.emit('welcome-message', {
             user: 'server',
-            message: `Hello ${data.username}! Welcome to the chat. There are ${Object.keys(users).length
-                } users connected`,
+            message: `Hello ${data.username}! Welcome to the chat. User count: ${Object.keys(user_list).length}`,
         })
     })
 
-    // handles message posted by client
     socket.on('new-message', (data) => {
-        console.log(`new-message from ${data.user}`)
-        // broadcast message to all sockets except the one that triggered the event
+        console.log(`${data.user} sent a message`)
         socket.broadcast.emit('broadcast-message', {
-            user: users[data.user],
+            user: user_list[data.user],
             message: data.message,
         })
     })
