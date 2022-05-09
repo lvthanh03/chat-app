@@ -68,6 +68,10 @@ io.on('connection', (socket) => {
             user: 'server',
             message: `Hello ${data.username}! Welcome to the chat. User count: ${Object.keys(user_list).length}`,
         })
+        socket.broadcast.emit('broadcast-message', {
+            user: 'server',
+            message: `${data.username} joined the chat. User count: ${Object.keys(user_list).length}`,
+        })
     })
 
     socket.on('new-message', (data) => {

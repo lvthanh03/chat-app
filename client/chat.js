@@ -7,7 +7,6 @@ const username = prompt('Hello! Type in your username:')
 socket.emit('new-connection', { username })
 
 socket.on('welcome-message', (data) => {
-    console.log('received welcome-message >>', data)
     addMessage(data, false)
 })
 
@@ -20,6 +19,7 @@ function addMessage(data, isSelf = false) {
         messageElement.innerText = `${data.message}`
     } else {
         if (data.user === 'server') {
+            messageElement.classList.add('server-message')
             messageElement.innerText = `${data.message}`
         } else {
             messageElement.classList.add('others-message')
@@ -49,6 +49,6 @@ messageForm.addEventListener('submit', (e) => {
 })
 
 socket.on('broadcast-message', (data) => {
-    console.log('📢 broadcast-message event >> ', data)
+    console.log(data)
     addMessage(data, false)
 })
