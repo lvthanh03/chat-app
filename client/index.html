@@ -16,6 +16,7 @@
     body {
       font-family: Roboto Mono;
       box-sizing: border-box;
+      text-align: center;
     }
 
     #app {
@@ -25,17 +26,21 @@
 
     #chat_Container {
       height: 75vh;
-      border: 1px solid #ccffcc;
+      width: 50%;
+      border: 2px solid #ccffcc;
       border-radius: 10px;
-      margin: 1rem 1rem;
-      padding: 0.5rem;
+      margin: 0 auto;
+      margin-top: 3rem;
+      padding: 0.5rem 0;
       overflow-x: hidden;
+      display: block;
     }
 
     #messageForm {
-      width: 80%;
-      position: absolute;
+      width: 50%;
       bottom: 10px;
+      margin: 0 auto;
+      margin-top: 1rem;
     }
 
     .input {
@@ -81,23 +86,29 @@
       text-align: center;
       border-radius: 5px;
       padding: 0.5rem;
-      margin-top: 1rem;
       word-wrap: break-word;
     }
 
     .self-message {
       background-color: #ccffcc;
       text-align: right;
+      width: 50%;
+      margin: 0.25rem 0.3rem 0.25rem auto;
     }
 
     .server-message {
       background-color: #fa7962;
       text-align: center;
+      width: 100%;
+      margin: 0.25rem auto 0.25rem auto;
     }
 
     .others-message {
       background-color: aqua;
+      margin: 0.25rem auto 0.25rem 0.3rem;
       text-align: left;
+      margin-left: 0.3rem;
+      width: 50%;
     }
   </style>
 </head>
