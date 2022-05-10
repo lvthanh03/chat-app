@@ -66,7 +66,7 @@ io.on('connection', (socket) => {
         user_list[socket.id] = data.username
         socket.emit('welcome-message', {
             user: 'server',
-            message: `Hello ${data.username}! Welcome to the chat. User count: ${Object.keys(user_list).length}`,
+            message: `Hello ${data.username}! Welcome to the chat.\nUser count: ${Object.keys(user_list).length}`,
         })
         socket.broadcast.emit('broadcast-message', {
             user: 'server',
