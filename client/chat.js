@@ -2,9 +2,15 @@ console.log('Loaded chat.js')
 
 var socket = io.connect();
 
-const username = prompt('Hello! Type in your username:')
+var username = prompt('Hello! Type in your username:')
 
-socket.emit('new-connection', { username })
+if (username == '') {
+    username = 'Guest' + Math.floor(Math.random() * 1000)
+}
+
+if (username !== null) {
+    socket.emit('new-connection', { username })
+}
 
 socket.on('welcome-message', (data) => {
     addMessage(data, false)
@@ -16,14 +22,14 @@ function addMessage(data, isSelf = false) {
 
     if (isSelf) {
         messageElement.classList.add('self-message')
-        messageElement.innerText = `${data.message}`
+        messageElement.innerHTML = `${data.message}`
     } else {
         if (data.user === 'server') {
             messageElement.classList.add('server-message')
-            messageElement.innerText = `${data.message}`
+            messageElement.innerHTML = `${data.message}`
         } else {
             messageElement.classList.add('others-message')
-            messageElement.innerText = `${data.user}: ${data.message}`
+            messageElement.innerHTML = `<strong>${data.user}:</strong> ${data.message}`
         }
     }
     const chat_Container = document.getElementById('chat_Container')

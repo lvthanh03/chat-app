@@ -81,4 +81,13 @@ io.on('connection', (socket) => {
             message: data.message,
         })
     })
+
+    socket.on('disconnect', () => {
+        console.log(`${user_list[socket.id]} disconnected`)
+        socket.broadcast.emit('welcome-message', {
+            user: 'server',
+            message: `${user_list[socket.id]} left the chat. User count: ${Object.keys(user_list).length - 1}`,
+        })
+        delete user_list[socket.id]
+    })
 })

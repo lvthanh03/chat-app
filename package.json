@@ -4,5 +4,20 @@
   },
   "scripts": {
     "start": "node server.js"
-  }
+  },
+  "name": "chat-app",
+  "version": "1.0.0",
+  "main": "server.js",
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lvthanh03/chat-app.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/lvthanh03/chat-app/issues"
+  },
+  "homepage": "https://github.com/lvthanh03/chat-app#readme",
+  "description": ""
 }
